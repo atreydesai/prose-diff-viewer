@@ -1,5 +1,5 @@
 # prose-diff-viewer
-
+![diff viewer preview](readme-image.png)
 A local, inline diff viewer for **markdown book drafts** when I'm making books for [autofiction](https://www.autofiction.ai/). It's an easier way to visually see how
 manuscript changed between any two versions:
 added text blue + underlined, removed text red + struck through.
