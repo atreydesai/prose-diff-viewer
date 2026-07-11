@@ -49,6 +49,14 @@ function initSettings() {
   $("font-reset").onclick = () => { settings.size = DEFAULT_SETTINGS.size; applySettings(); };
   $("justify").onchange = (e) => { settings.justify = e.target.checked; applySettings(); };
   applySettings();
+
+  const setSidebar = (hiddenState) => {
+    document.body.classList.toggle("sidebar-hidden", hiddenState);
+    localStorage.setItem("pdv-sidebar-hidden", hiddenState ? "1" : "");
+  };
+  $("hide-sidebar").onclick = () => setSidebar(true);
+  $("sidebar-toggle").onclick = () => setSidebar(false);
+  setSidebar(localStorage.getItem("pdv-sidebar-hidden") === "1");
 }
 
 async function api(path) {
@@ -189,6 +197,11 @@ async function init() {
     if (e.target.tagName === "SELECT" || e.target.tagName === "INPUT") return;
     if (e.key === "n") focusChange(focusIdx + 1);
     if (e.key === "p") focusChange(focusIdx - 1);
+    if (e.key === "[") {
+      const nowHidden = !document.body.classList.contains("sidebar-hidden");
+      document.body.classList.toggle("sidebar-hidden", nowHidden);
+      localStorage.setItem("pdv-sidebar-hidden", nowHidden ? "1" : "");
+    }
   });
 
   loadDiff();

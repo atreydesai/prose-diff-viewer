@@ -10,7 +10,10 @@
 <aside id="sidebar">
   <div id="sidebar-head">
     <h1>prose diff</h1>
-    <button id="settings-btn" title="settings" aria-label="settings">⚙</button>
+    <div class="head-btns">
+      <button id="settings-btn" title="settings" aria-label="settings">⚙</button>
+      <button id="hide-sidebar" title="hide sidebar" aria-label="hide sidebar">⟨</button>
+    </div>
   </div>
 
   <div id="settings" hidden>
@@ -59,6 +62,8 @@
   <div id="changes-head" hidden>Changes (<span id="change-count">0</span>) <span class="hint">n / p to step</span></div>
   <ol id="change-list"></ol>
 </aside>
+
+<button id="sidebar-toggle" title="show sidebar" aria-label="show sidebar">☰</button>
 
 <main id="content">
   <div id="doc" class="doc">
