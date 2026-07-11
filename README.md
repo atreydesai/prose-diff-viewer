@@ -1,14 +1,11 @@
 # prose-diff-viewer
 
-A local, inline diff viewer for **markdown book drafts** — see how your
-manuscript changed between any two versions, rendered as readable prose:
-added text blue + underlined, removed text red + struck through
-(latexdiff conventions), with a clickable changed-passage index.
+A local, inline diff viewer for **markdown book drafts** when I'm making books for [autofiction](https://www.autofiction.ai/). It's an easier way to visually see how
+manuscript changed between any two versions:
+added text blue + underlined, removed text red + struck through.
 
 Inspired by [alpaylan/latex-diff-viewer](https://github.com/alpaylan/latex-diff-viewer),
-reworked for markdown instead of LaTeX and for purely local use — no CI, no
-GitHub Actions, no TeX toolchain. Python stdlib only; nothing to install
-beyond Python ≥ 3.10.
+reworked for my use!
 
 ## Quick start
 
@@ -73,5 +70,5 @@ is treated as prose.
 
 ## License
 
-MIT. UI/workflow concept borrowed with gratitude from
+MIT. UI/workflow concept borrowed from
 [latex-diff-viewer](https://github.com/alpaylan/latex-diff-viewer) (MIT).
