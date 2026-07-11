@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>prose diff viewer</title>
+<link rel="stylesheet" href="viewer.css">
+</head>
+<body>
+<aside id="sidebar">
+  <h1>prose diff</h1>
+  <label for="doc-select">Document</label>
+  <select id="doc-select"></select>
+
+  <label for="base-select">Base</label>
+  <select id="base-select"></select>
+
+  <label for="compare-select">Compare</label>
+  <select id="compare-select"></select>
+
+  <div class="btn-row">
+    <button id="prev-pair" title="step both selections one version earlier">◀ step</button>
+    <button id="next-pair" title="step both selections one version later">step ▶</button>
+  </div>
+  <button id="generate" class="primary">Show diff</button>
+
+  <div id="stats" hidden>
+    <span class="added">+<span id="stat-added">0</span> words</span>
+    <span class="removed">−<span id="stat-removed">0</span> words</span>
+  </div>
+
+  <label class="check"><input type="checkbox" id="clean-read"> Clean read (hide deletions)</label>
+
+  <div id="changes-head" hidden>Changes (<span id="change-count">0</span>) <span class="hint">n / p to step</span></div>
+  <ol id="change-list"></ol>
+</aside>
+
+<main id="content">
+  <div id="doc" class="doc">
+    <p class="placeholder">Pick a document and two versions, then <em>Show diff</em>.</p>
+  </div>
+  <nav id="change-nav" hidden>
+    <button id="prev-change" title="previous change (p)">↑</button>
+    <span id="change-pos"></span>
+    <button id="next-change" title="next change (n)">↓</button>
+  </nav>
+</main>
+
+<script src="viewer.js"></script>
+</body>
+</html>

@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "prose-diff-viewer"
+version = "0.1.0"
+description = "Local inline word-level diff viewer for markdown book drafts (snapshot histories and git)"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+dependencies = []
+
+[project.scripts]
+prose-diff-viewer = "prosediff_viewer.cli:main"
+pdv = "prosediff_viewer.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+prosediff_viewer = ["static/*"]
