@@ -8,7 +8,32 @@
 </head>
 <body>
 <aside id="sidebar">
-  <h1>prose diff</h1>
+  <div id="sidebar-head">
+    <h1>prose diff</h1>
+    <button id="settings-btn" title="settings" aria-label="settings">⚙</button>
+  </div>
+
+  <div id="settings" hidden>
+    <label>Theme</label>
+    <div class="seg" id="theme-seg">
+      <button data-theme="auto">Auto</button>
+      <button data-theme="light">Light</button>
+      <button data-theme="dark">Dark</button>
+    </div>
+    <label>Text size</label>
+    <div class="seg" id="size-seg">
+      <button id="font-dec">A−</button>
+      <button id="font-reset">A</button>
+      <button id="font-inc">A+</button>
+    </div>
+    <label>Font</label>
+    <div class="seg" id="font-seg">
+      <button data-font="serif">Serif</button>
+      <button data-font="sans">Sans</button>
+    </div>
+    <label class="check"><input type="checkbox" id="justify" checked> Justify text</label>
+  </div>
+
   <label for="doc-select">Document</label>
   <select id="doc-select"></select>
 

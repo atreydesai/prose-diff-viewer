@@ -8,6 +8,49 @@ let manifest = null;
 let changes = [];
 let focusIdx = -1;
 
+/* ---- settings ---- */
+const DEFAULT_SETTINGS = { theme: "auto", size: 18, font: "serif", justify: true };
+let settings = { ...DEFAULT_SETTINGS };
+try {
+  settings = { ...DEFAULT_SETTINGS, ...JSON.parse(localStorage.getItem("pdv-settings") || "{}") };
+} catch { /* corrupted storage: fall back to defaults */ }
+
+function applySettings() {
+  const root = document.documentElement;
+  if (settings.theme === "auto") delete root.dataset.theme;
+  else root.dataset.theme = settings.theme;
+  root.style.setProperty("--doc-size", settings.size + "px");
+  root.style.setProperty("--doc-font", settings.font === "sans" ? "var(--doc-sans)" : "var(--doc-serif)");
+  document.body.classList.toggle("no-justify", !settings.justify);
+  for (const b of document.querySelectorAll("#theme-seg button")) {
+    b.classList.toggle("active", b.dataset.theme === settings.theme);
+  }
+  for (const b of document.querySelectorAll("#font-seg button")) {
+    b.classList.toggle("active", b.dataset.font === settings.font);
+  }
+  $("justify").checked = settings.justify;
+  localStorage.setItem("pdv-settings", JSON.stringify(settings));
+}
+
+function initSettings() {
+  const panel = $("settings"), btn = $("settings-btn");
+  btn.onclick = () => {
+    panel.hidden = !panel.hidden;
+    btn.classList.toggle("open", !panel.hidden);
+  };
+  for (const b of document.querySelectorAll("#theme-seg button")) {
+    b.onclick = () => { settings.theme = b.dataset.theme; applySettings(); };
+  }
+  for (const b of document.querySelectorAll("#font-seg button")) {
+    b.onclick = () => { settings.font = b.dataset.font; applySettings(); };
+  }
+  $("font-dec").onclick = () => { settings.size = Math.max(13, settings.size - 1); applySettings(); };
+  $("font-inc").onclick = () => { settings.size = Math.min(26, settings.size + 1); applySettings(); };
+  $("font-reset").onclick = () => { settings.size = DEFAULT_SETTINGS.size; applySettings(); };
+  $("justify").onchange = (e) => { settings.justify = e.target.checked; applySettings(); };
+  applySettings();
+}
+
 async function api(path) {
   const r = await fetch(path);
   const j = await r.json();
@@ -108,6 +151,7 @@ function focusChange(i) {
 }
 
 async function init() {
+  initSettings();
   manifest = await api("/api/manifest");
   docSel.innerHTML = "";
   for (const d of manifest.documents) {
